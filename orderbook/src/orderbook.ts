@@ -1,7 +1,7 @@
 interface Order{
     price:number;
     quantity:number;
-    orderid:string;
+    orderId:string;
 }
 interface Bid extends Order{
     side:'bid';

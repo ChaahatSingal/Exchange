@@ -1,4 +1,4 @@
-import { Express } from "express";
+import express from "express";
 import { OrderInputSchema } from "./types";
 import { orderbook,bookWithQuantity } from "./orderbook";
 import { error } from "console";
@@ -19,7 +19,7 @@ if(baseAsset!==BASE_ASSET|| quoteAsset!==QUOTE_ASSET){
     res.status(400).send('Invalid base or quote');
     return;
 }
-const{ executedQty,fills}=fillOrder(orderId,price,quantity,side,type);
+const{ executedQty,fills}=fillOrder(orderId,price,quantity,side,kind);
 res.send({
     orderId,
     executedQty,
@@ -71,6 +71,7 @@ function fillOrder(orderId:string,price:number,quantity:number,side:"buy"|"sell"
             orderbook.bids.push({
                 price,
                 quantity:quantity-executedQty,
+               side:'bid',
                 orderId
             });
             bookWithQuantity.bids[price] = (bookWithQuantity.bids[price] || 0) + (quantity - executedQty);
@@ -104,7 +105,7 @@ else{
             price,
             quantity:quantity,
             side:'ask',
-            orderid
+            orderId
         })
         bookWithQuantity.asks[price] = (bookWithQuantity.asks[price] || 0) + (quantity);
     }
