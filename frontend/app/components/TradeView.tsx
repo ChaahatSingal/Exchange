@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { ChartManager } from "../utils/ChartManager";
-import { getKlines } from "../utils/httpClient";
+import { getKlines } from "../utils/httpClients";
 import { KLine } from "../utils/types";
 
 export function TradeView({
@@ -39,7 +39,7 @@ export function TradeView({
             color: "white",
           }
         );
-        //@ts-ignore
+        //@ts-expect-error
         chartManagerRef.current = chartManager;
       }
     };

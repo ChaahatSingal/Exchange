@@ -3,7 +3,7 @@ export const CANCEL_ORDER="CANCEL_ORDER";
 export const GET_DEPTH="GET_DEPTH";
 export const ON_RAMP="ON_RAMP";
 export const GET_OPEN_ORDER="GET_OPEN_ORDER";
-export const GET_BALANCES="BALANCES"
+export const GET_BALANCES="GET_BALANCES";
 export type MessageFromOrderbook={
     type:"Depth",
     payload:{
@@ -33,7 +33,7 @@ export type MessageFromOrderbook={
     }
 } |{
     type:"OPEN_ORDERS",
-    payoad:{
+    payload:{
         orderId:string,
         executsId:number,
         price:string,
@@ -42,7 +42,7 @@ export type MessageFromOrderbook={
         userId:string
     }[]
 }|{
-    type:"BALANCES",
+    type:"GET_BALANCES",
     payload:{
         [assest:string]:{
             total:string,

@@ -1,10 +1,11 @@
 import fs from "fs";
-import { RedisManager } from "../../RedisManager";
+import { RedisManager } from "../RedisManager";
 import { ORDER_UPDATE,TRADE_ADDED } from "../types";
 import { CANCEL_ORDER,CREATE_ORDER,GET_DEPTH,GET_OPEN_ORDERS,MessageFromApi,ON_RAMP } from "../types/fromApi";
 import { Orderbook,Order,Fill } from "./Orderbook";
 import { setInterval } from "timers/promises";
 import { error } from "console";
+
 export const BASE_CURRENCY="INR";
 interface UserBalance{
     [key:string]:{
@@ -34,18 +35,18 @@ export class Engine{
             this.orderbooks=[new Orderbook('TATA',[],[],0,0)];
             this.setBaseBalances();
         }
-        setInterval(()=>{
+         global.setInterval(() => {
             this.saveSnapshot();
-        },1000*3);
-    }
-    saveSnapshot(){
-        const snapshotSnapsnhot={
-            orderbooks:this.orderbooks.map(o=>o.getSnapshot),
-            balances:Array.from(this.balances.entries())
+        }, 1000 * 3);
+            
         }
-        fs.writeFileSync("./snapshot.json",JSON.stringify(snapshotSnapsnhot));
-
-    }
+        saveSnapshot() {
+            const snapshotSnapshot = {
+                orderbooks: this.orderbooks.map(o => o.getSnapshot()),  // Add parentheses to call the method
+                balances: Array.from(this.balances.entries())
+            }
+            fs.writeFileSync("./snapshot.json", JSON.stringify(snapshotSnapshot));
+        }
     process({message,clientId}:{message:MessageFromApi,clientId:string}){
         switch(message.type){
             case CREATE_ORDER:
@@ -86,7 +87,9 @@ export class Engine{
                             throw new Error(" no ordr found");
                         }
                         if(order.side==="buy"){
-                            const price=cancelorderbook.cancelBid(order)
+                            //@ts-ignore
+                            const price =cancelorderbook.cancelBid(order)
+                            //@ts-ignore
                             const leftQuantity=(order.quantity-order.filled)*price;
                              //@ts-ignore
                              this.balances.get(order.userId)[BASE_CURRENCY].available  +=leftQuantity;
@@ -227,7 +230,7 @@ export class Engine{
                 data: {
                     market: market,
                     id: fill.tradeId.toString(),
-                    isBuyerMaker: fill.otherUserId === userId, // TODO: Is this right?
+                    isBuyerMakaer: fill.otherUserId === userId, // TODO: Is this right?
                     price: fill.price,
                     quantity: fill.qty.toString(),
                     quoteQuantity: (fill.qty * Number(fill.price)).toString(),

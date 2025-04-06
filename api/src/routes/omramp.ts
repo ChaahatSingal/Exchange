@@ -7,7 +7,7 @@ onrampRouter.post("/", async (req, res) => {
     const { userId, amount, txnId } = req.body;
 
     if (!userId || !amount || !txnId) {
-        return res.status(400).json({ error: "userId, amount, and txnId are required" });
+       res.status(400).json({ error: "userId, amount, and txnId are required" });
     }
 
     try {
@@ -16,7 +16,7 @@ onrampRouter.post("/", async (req, res) => {
             data: { userId, amount, txnId }
         });
 
-        res.json({ message: "On-ramp successful", details: response.payload });
+        res.json({ message: "On-ramp successful", details: response.type});
     } catch (error) {
         res.status(500).json({ error: "On-ramp processing failed" });
     }

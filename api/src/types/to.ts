@@ -8,6 +8,15 @@ export type MessageToEngine={
         side:"buy"|"sell",
         userId:string
     }
+}| {
+    type: typeof CREATE_ORDER,  // Added the CREATE_ORDER type
+    data: {
+        market: string,
+        price: string,
+        quantity: string,
+        side: "buy" | "sell",
+        userId: string
+    }
 }|{
     type: typeof CANCEL_ORDER,
     data:{
@@ -33,7 +42,7 @@ export type MessageToEngine={
         market:string,
     }
 }|{
-    typr: typeof GET_BALANCES,
+    type: typeof GET_BALANCES,
     data:{
         userId:string
     }

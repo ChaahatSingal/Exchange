@@ -15,7 +15,7 @@ orderRouter.post("/",async(req,res)=>{
             userId
         }
     });
-    res.json(response.payload);
+    res.json(response.type);
 });
 
 orderRouter.delete("/", async (req, res) => {
@@ -27,7 +27,7 @@ orderRouter.delete("/", async (req, res) => {
             market
         }
     });
-    res.json(response.payload);
+    res.json(response.type);
 });
 
 orderRouter.get("/open", async (req, res) => {
@@ -38,5 +38,5 @@ orderRouter.get("/open", async (req, res) => {
             market: req.query.market as string
         }
     });
-    res.json(response.payload);
+    res.json(response.type);
 });

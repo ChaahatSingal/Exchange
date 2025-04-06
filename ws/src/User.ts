@@ -8,9 +8,9 @@ export class User{
     constructor(id:string,ws:WebSocket){
         this.id=id;
         this.ws=ws;
-        addListener();
+        this.addListner();
     }
-        private subscriptions:string[]:[];
+        private subscriptions:string[]=[];
         public subscribe(subscription:string){
             this.subscriptions.push(subscription);
         }

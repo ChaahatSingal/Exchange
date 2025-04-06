@@ -3,7 +3,7 @@ import { User } from "./User";
 import { SubscriptionManager } from "./SubscriptionManager";
 export class UserManager{
     private static instance: UserManager;
-    private users: Map<string,User>;
+    private users: Map<string,User>=new Map();
    private constructor(){
 
     }
@@ -14,10 +14,10 @@ export class UserManager{
         return this.instance;
     }
     public addUser(ws:WebSocket){
-        const id:this.getRandomId();
+        const id=this.getRandomId();
         const user=new User(id,ws);
         this.users.set(id,user);
-        this.registerOnClose(ws, id);
+        this.registeronClose(ws, id);
         return user;
     }
     private registeronClose(ws:WebSocket,id:string){
