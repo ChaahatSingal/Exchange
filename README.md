@@ -1,1 +1,1 @@
-It is a exchange platform where trades occur
+I have tried to make the demo of platform where crypto exchange takes place
